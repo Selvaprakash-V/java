@@ -367,3 +367,190 @@ public class MyClass {
 ---
 
 > _Made with ❤️ — Day 1 of Java Learning Journey (Continued)_
+
+---
+
+# ☕ DAY 1 (Part 3) — Data Types, Pointers & Wrapper Classes
+
+---
+
+## 📌 Topics Covered
+
+- [Data Types in Java](#1-data-types-in-java)
+- [Primitive Data Types](#2-primitive-data-types)
+- [Non-Primitive Data Types](#3-non-primitive-reference-data-types)
+- [Pointers in Java](#4-can-we-declare-pointer-in-java)
+- [Wrapper Classes](#5-wrapper-classes-in-java)
+- [Why Wrapper Classes?](#6-why-do-we-need-wrapper-classes)
+
+---
+
+## 1. Data Types in Java
+
+Data types specify the **type of data a variable can store**.
+
+There are **two types** of data types in Java:
+
+```
+Data Types in Java
+ ├── Primitive Data Types       (8 types)
+ └── Non-Primitive Data Types   (Reference Types)
+```
+
+---
+
+## 2. Primitive Data Types
+
+Primitive data types are **basic data types** that store **single values** and are **not objects**.
+
+### 🔹 Java's 8 Primitive Data Types
+
+| Data Type | Size | Description |
+|-----------|------|-------------|
+| `boolean` | 1 bit | Stores `true` or `false` |
+| `byte` | 8-bit | Signed two's complement integer |
+| `short` | 16-bit | Signed two's complement integer |
+| `int` | 32-bit | Signed two's complement integer |
+| `long` | 64-bit | Signed two's complement integer |
+| `float` | 32-bit | Single-precision IEEE 754 floating-point |
+| `double` | 64-bit | Double-precision IEEE 754 floating-point |
+| `char` | 16-bit | Stores a single Unicode character |
+
+### 🔹 Example
+
+```java
+int number    = 10;
+double price  = 99.99;
+char grade    = 'A';
+boolean status = true;
+```
+
+### 🔹 Key Features of Primitive Types
+
+| Feature | Detail |
+|---------|--------|
+| 📍 Storage | Stored **directly in memory** (stack) |
+| ⚡ Speed | **Faster** access |
+| 💾 Memory | **Lower** memory usage |
+| 🚫 Objects | **Not** objects — no methods |
+
+---
+
+## 3. Non-Primitive (Reference) Data Types
+
+Non-Primitive types are also called **Reference Data Types**.
+
+```
+ Variable                Heap Memory
+ ┌──────┐               ┌────────────────┐
+ │ ref  │──────────────►│  Actual Object │
+ └──────┘               └────────────────┘
+```
+
+They:
+- Store the **memory address** of the value
+- Are created using **classes**
+- Can have **methods and properties**
+
+### 🔹 Types of Non-Primitive Data Types
+
+| Type | Example |
+|------|---------|
+| `String` | `"Java"` |
+| `Array` | `int[] nums = {1, 2, 3}` |
+| `Class` | User-defined classes |
+| `Object` | `Object obj = new Object()` |
+| `Interface` | `List`, `Map`, etc. |
+
+### 🔹 Example
+
+```java
+String name    = "Java";       // name stores reference of String object
+int[] numbers  = {1, 2, 3};   // numbers stores reference of array object
+```
+
+---
+
+## 4. Can We Declare Pointer in Java?
+
+### ❌ No, Java does NOT support pointers.
+
+### 🔹 Why?
+
+| Reason | Explanation |
+|--------|-------------|
+| 🔒 Security | Pointers can access **direct memory locations** causing security risks |
+| 💥 Stability | Pointers can cause **memory corruption** |
+| 🧹 Simplicity | Java was designed to be **simpler and less error-prone** |
+
+> 💡 Java uses **references** instead of pointers — safer and managed by the JVM's Garbage Collector.
+
+---
+
+## 5. Wrapper Classes in Java
+
+A **Wrapper Class** converts a **primitive data type into an object** — it "wraps" a primitive inside an object.
+
+### 🔹 Primitive → Wrapper Mapping
+
+| Primitive | Wrapper Class |
+|-----------|---------------|
+| `int` | `Integer` |
+| `byte` | `Byte` |
+| `short` | `Short` |
+| `long` | `Long` |
+| `float` | `Float` |
+| `double` | `Double` |
+| `char` | `Character` |
+| `boolean` | `Boolean` |
+
+### 🔹 Example
+
+```java
+int num         = 10;
+Integer obj     = Integer.valueOf(num);  // Boxing
+int value       = obj.intValue();        // Unboxing
+```
+
+---
+
+## 6. Why Do We Need Wrapper Classes?
+
+| Reason | Detail |
+|--------|--------|
+| 🔒 Immutable | Wrapper classes are **final and immutable** |
+| 🛠️ Utility Methods | Provide methods like `valueOf()`, `parseInt()`, `compareTo()` |
+| 🔄 Autoboxing | Support **automatic** primitive ↔ object conversion |
+| 📦 Collections | Required to store primitives in **Collections** (e.g., `ArrayList<Integer>`) |
+
+### 🔹 Autoboxing & Unboxing
+
+```
+Autoboxing:   primitive  ──────────►  Object
+                int 100  ──────────►  Integer(100)
+
+Unboxing:     Object     ──────────►  primitive
+           Integer(100)  ──────────►  int 100
+```
+
+```java
+Integer num = 100;   // Autoboxing  — int → Integer (automatic)
+int value   = num;   // Unboxing    — Integer → int (automatic)
+```
+
+---
+
+## 📌 Summary
+
+| # | Key Takeaway |
+|---|--------------|
+| 1 | 📊 Java has **2 types** of data types: Primitive and Non-Primitive |
+| 2 | 🔢 There are **8 primitive** data types |
+| 3 | 🔗 Non-primitive types store **references** (memory addresses) |
+| 4 | 🚫 Java does **not support pointers** for security & simplicity |
+| 5 | 📦 **Wrapper classes** convert primitives into objects |
+| 6 | ⚡ **Autoboxing & Unboxing** simplify primitive ↔ object conversions |
+
+---
+
+> _Made with ❤️ — Day 1 of Java Learning Journey (Complete)_
