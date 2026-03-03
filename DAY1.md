@@ -554,3 +554,292 @@ int value   = num;   // Unboxing    — Integer → int (automatic)
 ---
 
 > _Made with ❤️ — Day 1 of Java Learning Journey (Complete)_
+
+---
+
+# ☕ DAY 1 (Part 4) — Variables, `static` & `this`, I/O, Operators, String vs StringBuffer
+
+---
+
+## 📌 Topics Covered
+
+- [Instance Variable vs Local Variable](#1-difference-between-instance-variable-and-local-variable)
+- [Instance Variable vs Class Variable](#2-difference-between-instance-variable-and-class-variable)
+- [static Keyword](#3-static-keyword-in-java)
+- [this Keyword](#4-this-keyword)
+- [System.out vs System.err](#5-difference-between-systemout-and-systemerr)
+- [Console Input Methods](#6-ways-to-take-input-from-console-in-java)
+- [print vs println vs printf](#7-difference-between-print-println-and-printf)
+- [>> vs >>> Operators](#8-difference-between--and--operators)
+- [Dot (.) Operator](#9-dot--operator)
+- [String vs StringBuffer](#10-difference-between-string-and-stringbuffer)
+
+---
+
+## 1. Difference Between Instance Variable and Local Variable
+
+| Feature | Instance Variable | Local Variable |
+|---------|-------------------|----------------|
+| 📍 Declaration | Inside class, **outside** methods | Inside a **method, constructor, or block** |
+| 🔰 Default Value | ✅ Has default value | ❌ No default value (must initialize) |
+| 🔭 Scope | Throughout the **class** | Limited to the **method/block** |
+| 🔗 Association | Belongs to an **object** | Exists only during **method execution** |
+
+### 🔹 Example
+
+```java
+class Demo {
+    int x = 10;   // Instance variable
+
+    void show() {
+        int y = 5;   // Local variable
+        System.out.println(x + y);
+    }
+}
+```
+
+---
+
+## 2. Difference Between Instance Variable and Class Variable
+
+### 🔹 Instance Variable
+
+| Property | Detail |
+|----------|--------|
+| Keyword | No `static` |
+| Belongs to | A specific **object** |
+| Copies | Each object has its **own copy** |
+| Values | Can **differ** between objects |
+
+### 🔹 Class Variable
+
+| Property | Detail |
+|----------|--------|
+| Keyword | Uses `static` |
+| Belongs to | The **class** itself |
+| Copies | **One copy** shared among all objects |
+| Values | **Same** for all objects |
+
+### 🔹 Example
+
+```java
+class Student {
+    String name;                    // Instance variable — unique per object
+    static String college = "ABC"; // Class variable — shared by all objects
+}
+```
+
+---
+
+## 3. `static` Keyword in Java
+
+The `static` keyword indicates that a member **belongs to the class** rather than to any object.
+
+It can be used with:
+
+```
+static
+ ├── Variables   → Shared across all objects
+ ├── Methods     → Called using class name, no object needed
+ └── Blocks      → Runs once when the class loads
+```
+
+### 🔹 1. Static Variables
+
+```java
+class Counter {
+    static int count = 0;  // Shared by all objects
+}
+```
+
+### 🔹 2. Static Methods
+
+- Called using the **class name**
+- No object creation needed
+- ❌ Cannot directly access non-static variables
+
+```java
+Math.pow(2, 3);   // Called without creating Math object
+```
+
+### 🔹 3. Static Block
+
+- Used to **initialize static variables**
+- Runs **only once** when the class loads
+
+```java
+static {
+    System.out.println("Static block executed");
+}
+```
+
+---
+
+## 4. `this` Keyword
+
+The `this` keyword refers to the **current object**.
+
+### 🔹 Uses of `this`
+
+#### 1️⃣ Access Instance Variables
+
+Differentiates instance variables from local variables with the same name.
+
+```java
+class Student {
+    int id;
+
+    Student(int id) {
+        this.id = id;   // this.id = instance variable, id = parameter
+    }
+}
+```
+
+#### 2️⃣ Constructor Chaining
+
+Calls another constructor in the **same class**.
+
+```java
+this();   // Calls no-arg constructor
+```
+
+#### 3️⃣ Pass Current Object
+
+Passes the current object as an **argument** to a method or constructor.
+
+```java
+show(this);   // Passes current object to show()
+```
+
+---
+
+## 5. Difference Between `System.out` and `System.err`
+
+| Feature | `System.out` | `System.err` |
+|---------|-------------|-------------|
+| 📤 Output | Standard output | Standard **error** output |
+| 🎯 Purpose | Normal program output | **Error/exception** messages |
+| 🎨 Console Color | Default | Usually **red** in IDEs |
+| Example | `System.out.println()` | `System.err.println()` |
+
+---
+
+## 6. Ways to Take Input from Console in Java
+
+| # | Method | Description |
+|---|--------|-------------|
+| 1️⃣ | **Command-line arguments** | Passed via `String args[]` |
+| 2️⃣ | **BufferedReader** | Reads character stream efficiently |
+| 3️⃣ | **Console class** | Used for secure password input |
+| 4️⃣ | **Scanner class** | Most commonly used, easy syntax |
+
+### 🔹 Scanner Example (Most Common)
+
+```java
+import java.util.Scanner;
+
+Scanner sc = new Scanner(System.in);
+int n = sc.nextInt();
+String s = sc.nextLine();
+```
+
+---
+
+## 7. Difference Between `print`, `println`, and `printf`
+
+| Method | Description |
+|--------|-------------|
+| `print()` | Prints output — cursor **stays on same line** |
+| `println()` | Prints output — cursor moves to **next line** |
+| `printf()` | Prints **formatted** output using format specifiers |
+
+### 🔹 Example
+
+```java
+System.out.print("Hello ");       // Hello World (same line)
+System.out.println("World");
+System.out.printf("Value: %d", 10); // Value: 10
+```
+
+---
+
+## 8. Difference Between `>>` and `>>>` Operators
+
+Both are **bitwise right-shift** operators.
+
+| Operator | Name | Behavior |
+|----------|------|----------|
+| `>>` | Signed right shift | **Preserves sign bit** (fills with sign bit) |
+| `>>>` | Unsigned right shift | **Fills with 0** regardless of sign |
+
+```
+Positive number:  0110 1010
+>> 1           :  0011 0101  (sign bit 0 preserved)
+>>> 1          :  0011 0101  (0 inserted)
+
+Negative number:  1110 1010
+>> 1           :  1111 0101  (sign bit 1 preserved)
+>>> 1          :  0111 0101  (0 inserted — changes sign!)
+```
+
+---
+
+## 9. Dot (`.`) Operator
+
+The dot operator is used to:
+
+| Use | Example |
+|-----|---------|
+| Access **instance variables** | `student.name` |
+| Call **methods** | `object.method()` |
+| Access **class members** | `Math.PI` |
+
+```java
+object.method();
+System.out.println();
+student.name = "Alice";
+```
+
+---
+
+## 10. Difference Between `String` and `StringBuffer`
+
+| Feature | `String` | `StringBuffer` |
+|---------|---------|---------------|
+| 🔒 Mutability | **Immutable** | **Mutable** |
+| ✏️ Modification | Creates a **new object** on change | **Modifies** same object |
+| 🔐 Thread Safety | N/A (immutable) | **Thread-safe** (synchronized) |
+| ⚡ Performance | Slower for frequent modifications | **Faster** for frequent changes |
+| 📦 Storage | **String Pool** (heap) | **Heap** only |
+
+### 🔹 Example
+
+```java
+// String — immutable
+String s = "Java";
+s.concat(" Programming");   // Creates a NEW object, s is unchanged
+System.out.println(s);      // Still prints: Java
+
+// StringBuffer — mutable
+StringBuffer sb = new StringBuffer("Java");
+sb.append(" Programming");  // Modifies the SAME object
+System.out.println(sb);     // Prints: Java Programming
+```
+
+---
+
+## 📌 Summary
+
+| # | Key Takeaway |
+|---|--------------|
+| 1 | 🏷️ **Instance variables** belong to objects; **local variables** exist only in methods |
+| 2 | 🏫 **Class variables** (`static`) are shared by all objects |
+| 3 | ⚙️ `static` makes members **class-level** — no object needed |
+| 4 | 👆 `this` refers to the **current object** |
+| 5 | 🖨️ Java has multiple **console input** methods; `Scanner` is most common |
+| 6 | `>>` preserves the **sign bit**; `>>>` fills with **zeros** |
+| 7 | 🔒 `String` is **immutable**; `StringBuffer` is **mutable & thread-safe** |
+
+---
+
+> _Made with ❤️ — Day 1 of Java Learning Journey (Final)_
